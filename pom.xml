@@ -19,47 +19,43 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <lwjgl.version>3.2.3</lwjgl.version>
+    </properties>
 
     <profiles>
         <profile>
-            <id>windows-profile</id>
-            <activation>
-                <os>
-                    <family>Windows</family>
-                </os>
-            </activation>
-            <properties>
-                <native.target>natives-windows</native.target>
-            </properties>
-        </profile>
-        <profile>
-            <id>linux-profile</id>
-            <activation>
-                <os>
-                    <family>Linux</family>
-                </os>
-            </activation>
-            <properties>
-                <native.target>natives-linux</native.target>
-            </properties>
-        </profile>
-        <profile>
-            <id>OSX-profile</id>
+            <id>lwjgl-natives-macos-amd64</id>
             <activation>
                 <os>
                     <family>mac</family>
+                    <arch>amd64</arch>
                 </os>
             </activation>
             <properties>
-                <native.target>natives-osx</native.target>
+                <lwjgl.natives>natives-macos</lwjgl.natives>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.lwjgl</groupId>
+                    <artifactId>lwjgl-vulkan</artifactId>
+                    <classifier>natives-macos</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>lwjgl-natives-windows-amd64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <lwjgl.natives>natives-windows</lwjgl.natives>
             </properties>
         </profile>
     </profiles>
-
-    <properties>
-        <lwjgl.version>3.2.3</lwjgl.version>
-        <lwjgl.natives>natives-windows</lwjgl.natives>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
