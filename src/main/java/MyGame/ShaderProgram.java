@@ -1,10 +1,6 @@
 package MyGame;
 
-import org.lwjgl.opengl.GL20C;
-import org.lwjgl.opengl.GL41;
-import org.lwjgl.opengl.GL41C;
-
-import static org.lwjgl.opengl.GL20C.*;
+import static org.lwjgl.opengl.GL20.*;
 
 public class ShaderProgram {
     private final int programId;
@@ -14,7 +10,7 @@ public class ShaderProgram {
     private int fragmentShaderId;
 
     public ShaderProgram() throws Exception {
-        programId = GL41C.glCreateProgram();
+        programId = glCreateProgram();
         if (programId == 0) {
             throw new Exception("Could not create Shader");
         }
