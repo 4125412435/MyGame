@@ -1,3 +1,5 @@
+package MyGame;
+
 public interface IGameLogic {
 
     void init() throws Exception;

@@ -1,14 +1,17 @@
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
+package MyGame;
 
-import java.util.Scanner;
+import org.lwjgl.glfw.*;
+
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_FORWARD_COMPAT;
+import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
 
 public class Window {
     public static void main(String[] args) throws InterruptedException {
         GameEngine gameEngine = new GameEngine("123",200,200,true,new DummyGame());
-    }
-    private long windowHandle;
+        gameEngine.run();
+}
+    private Long windowHandle;
     private int width;
     private int height;
     private boolean reSized;
@@ -30,12 +33,31 @@ public class Window {
             return;
         }
 
+        if(windowHandle==null){
+
+        }else {
+            GLFW.glfwDestroyWindow(windowHandle);
+        }
         GLFW.glfwDefaultWindowHints();
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE,GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR,3);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR,2);
 
         windowHandle = GLFW.glfwCreateWindow(width,height,title,0,0);
+
+        if(windowHandle==0){
+            System.out.println("MyGame.Window is Null");
+        }
+
+        GLFW.glfwMakeContextCurrent(windowHandle);
+        GLFW.glfwShowWindow(windowHandle);
+        //没有这段代码 界面会闪退 与下面的内容无关
+        GLFW.glfwSetKeyCallback(windowHandle,(window, key, scancode, action, mods)-> {
+            System.out.println("Key "+key+" Press");
+                if(key==GLFW.GLFW_KEY_ESCAPE&&action==GLFW_RELEASE){
+                    GLFW.glfwSetWindowShouldClose(window,true);
+                }
+        });
 
         setFramebufferSizeCallback();
     }

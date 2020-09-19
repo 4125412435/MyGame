@@ -1,3 +1,5 @@
+package MyGame;
+
 import org.lwjgl.glfw.GLFW;
 
 public class MainGame {

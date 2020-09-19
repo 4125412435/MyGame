@@ -1,3 +1,5 @@
+package MyGame;
+
 import org.lwjgl.opengl.GL11C;
 
 public class Renderer {
@@ -5,7 +7,9 @@ public class Renderer {
 
     public void init() throws Exception{
         shaderProgram = new ShaderProgram();
-        //shaderProgram.createVertexShader(Utils);
+        shaderProgram.createVertexShader(Utils.loadResource("/vertex.vs"));
+        shaderProgram.createFragmentShader(Utils.loadResource("/fragment.fs"));
+        shaderProgram.link();
     }
 
     public void clear(){
