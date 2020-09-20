@@ -1,6 +1,8 @@
 package MyGame;
 
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL20;
 
 import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_FORWARD_COMPAT;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
@@ -59,6 +61,8 @@ public class Window {
                 }
         });
 
+        GL.createCapabilities();
+
         setFramebufferSizeCallback();
     }
 
@@ -115,5 +119,14 @@ public class Window {
 
     public long getWindowHandle() {
         return windowHandle;
+    }
+
+    public void update(){
+        GLFW.glfwSwapBuffers(windowHandle);
+        GLFW.glfwPollEvents();
+    }
+
+    public void clearColor(float a,float b,float c,float d){
+        GL20.glClearColor(a,b,c,d);
     }
 }

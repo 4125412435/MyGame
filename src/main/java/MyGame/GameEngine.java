@@ -28,6 +28,7 @@ public class GameEngine implements Runnable{
 
     public void render(){
         gameLogic.render(window);
+        window.update();
     }
 
     public void update(float interval){
@@ -44,11 +45,9 @@ public class GameEngine implements Runnable{
     }
 
     private void loop(){
-        GL.createCapabilities();
         GLFW.glfwSwapInterval(2);
-        GLFW.glfwSwapBuffers(window.getWindowHandle());
         while (!glfwWindowShouldClose(window.getWindowHandle())) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+            //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
             glfwSwapBuffers(window.getWindowHandle()); // swap the color buffers
@@ -56,6 +55,8 @@ public class GameEngine implements Runnable{
             // Poll for window events. The key callback above will only be
             // invoked during this call.
             glfwPollEvents();
+
+            update(1);
 
             render();
         }
